@@ -41,22 +41,16 @@
         </nav> 
     </header>
     <main>
-        <div class="container py-5">
-            <article>
-                <ul>
-                    <li>
-                        Место: {{ post.location }}
-                    </li>
-                    <li>
-                        Дата: {{ post.date }}
-                    </li>
-                    <li>
-                        Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a>
-                    </li>
-                </ul>         
-                <p>{{ post.text|linebreaksbr }}</p>
-            </article>                
-        </div>
+      <div class="container py-5">
+        <article>
+          <ul>
+            <li>Место: {{ post.location }}</li>
+            <li>Дата: {{ post.date }}</li>
+            <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
+          </ul>         
+          <p>{{ post.text }}</p>          
+        </article>                
+      </div>
     </main>
     <footer class="border-top text-center py-3">
         <p>© Блогикум</p>    
