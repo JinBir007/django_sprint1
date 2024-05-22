@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 
 posts = [
     {
@@ -50,15 +50,15 @@ def index(request):
 
 
 def post_detail(request, id):
-    post = get_object_or_404(posts, id=id)
+    post = next((post for post in posts if post['id'] == id), None)
+    if post is None:
+        return render(request, '404.html', status=404)
     context = {'post': post}
     return render(request, 'blog/detail.html', context)
 
-
 def category_posts(request, category_slug):
     category_posts = [
-        post for post in posts
-        if post['category'] == category_slug
+        post for post in posts if post['category'] == category_slug
     ]
-    context = {'category_slug': category_slug, 'posts': category_posts}
+    context = {'category_posts': category_posts, 'category_slug': category_slug}
     return render(request, 'blog/category.html', context)
