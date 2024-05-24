@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-posts = [
+from django.http import Http404
+
+from typing import List, Dict
+
+posts: List[Dict] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -44,25 +48,27 @@ posts = [
 ]
 
 
+posts_dict = {post['id']: post for post in posts}
+
+
 def index(request):
     context = {'posts': reversed(posts)}
     return render(request, 'blog/index.html', context)
 
 
-def post_detail(request, id):
-    post = next((post for post in posts if post['id'] == id), None)
-    if post is None:
-        return render(request, '404.html', status=404)
+def post_detail(request, post_id):
+    post = posts_dict.get(post_id)
+    if not post:
+        raise Http404("Post not found")
     context = {'post': post}
     return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):
-    category_posts = [
-        post for post in posts if post['category'] == category_slug
-    ]
+    category_posts = [post for post in posts if post['category'] == category_slug]
     context = {
         'category_posts': category_posts,
         'category_slug': category_slug
     }
     return render(request, 'blog/category.html', context)
+    
