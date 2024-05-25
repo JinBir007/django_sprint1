@@ -6,7 +6,7 @@
     {% if truncated %}
       {{ post.text|truncatewords:30 }}
     {% else %}
-      {{ post.text }}
+      {{ post.text|linebreaksbr }}
     {% endif %}
   </p>
   {% if truncated %}
