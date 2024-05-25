@@ -3,6 +3,6 @@
 {% block content %}
   {% for post in posts %}
     <hr>
-    {% include "blog/post_card.html" with truncated=True %}
+    {% include "blog/includes/post_card.html" with truncated=True %}
   {% endfor %}
 {% endblock %}
