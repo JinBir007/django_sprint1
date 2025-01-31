@@ -1,16 +1,9 @@
+<<<<<<< HEAD
 {% extends 'base/base.html' %}
+=======
+{% extends 'base.html' %}
+>>>>>>> 4285f46702f9a432a91c1def2b693f638323ca35
 {% block title %}{{ post.location }}. {{ post.date }}{% endblock %}
 {% block content %}
-<main>
-    <div class="container py-5">
-        <article>
-            <ul>
-                <li>Место: {{ post.location }}</li>
-                <li>Дата: {{ post.date }}</li>
-                <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
-            </ul>
-            <p>{{ post.text|linebreaksbr }}</p>
-        </article>
-    </div>
-</main>
+  {% include 'blog/includes/post_card.html' with post=post full_text=True %}
 {% endblock %}
