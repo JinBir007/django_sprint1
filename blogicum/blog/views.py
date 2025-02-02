@@ -6,6 +6,7 @@ from django.http import Http404
 
 class Post(TypedDict):
     """Структура публикации."""
+
     id: int
     location: str
     date: str
