@@ -1,8 +1,19 @@
+from typing import TypedDict
+
 from django.shortcuts import render
 from django.http import Http404
 
 
-posts: list[dict] = [
+class Post(TypedDict):
+    """Структура публикации."""
+    id: int
+    location: str
+    date: str
+    category: str
+    text: str
+
+
+posts: list[Post] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
